@@ -18,7 +18,7 @@ int config_i2c_slave(struct i2c_device *dev){
   }
         
   if (ioctl(dev->fd, I2C_SLAVE, dev->addr) < 0){
-    printf("Failed to set the I2C address with ioctl\n");
+    printf("!!! Failed to set the I2C address with ioctl\n");
     return 1;
   }
   printf("Successfully set the device addres to 0x%x\n", dev->addr);
@@ -39,7 +39,7 @@ size_t i2c_write(struct i2c_device *dev, size_t offset, char* buffer, size_t cou
   }
 
   if (write(dev->fd, data, count+1) != (ssize_t)(count+1)){
-    printf("Error writing to device\n");
+    printf("!!! Error writing to device\n");
     return -1;
   }
   return count;
@@ -52,12 +52,12 @@ size_t i2c_read(struct i2c_device *dev, size_t offset, char* buffer, size_t coun
   data[0] = offset;
 
   if(write(dev->fd, data, 1) != 1){
-    printf("Error writing register offset to device\n");
+    printf("!!! Error writing register offset to device\n");
     return -1;
   }
 
   if(read(dev->fd, buffer, count) != (ssize_t)count){
-    printf("Error reading from device\n");
+    printf("!!! Error reading from device\n");
     return 1;
   }
 
