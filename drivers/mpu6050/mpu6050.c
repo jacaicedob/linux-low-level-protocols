@@ -27,11 +27,8 @@ int mpu6050_reset(struct mpu6050 *mpu){
 
   // Reset device
   buff[0] = 0x80; // DEVICE_RESET
-  if(i2c_write(&(mpu->dev), MPU6050_PWR_MGMT_1, buff, 2) != 2)
-  {
-    printf("!!! Failed to reset device\n");
-    return 1;
-  }
+  // Device reset kicks in immediately so we can expect the I2C to drop and therefore the transaction will fail;
+  i2c_write(&(mpu->dev), MPU6050_PWR_MGMT_1, buff, 2);
 
   usleep(100000); // 100ms
 
