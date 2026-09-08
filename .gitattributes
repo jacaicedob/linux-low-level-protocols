@@ -35,3 +35,6 @@
 *.exe   binary
 *.out   binary
 *.app   binary
+
+# Docs
+*.pdf 	binary
